@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <center>
+
+        
+        <h1>Product Management System</h1>
+        <h2>Add Product</h2>
+    </center>
+    </head>
+    <body>
+        <center>
+        <input type="text" id="pid" placeholder="enter pid"><br><br>
+        <input type="text" id="name" placeholder="enter name"><br><br>
+        <input type="text" id="price" placeholder="enter price"><br><br>
+        <input type="text" id="seller" placeholder="enter seller"><br><br>
+        <button onclick="addProduct()">Add Product</button>
+        </center>
+        <center>
+            <ul>    
+
+            </ul>
+        </center>
+        
+        <script>
+            var products=[];
+            function addProduct(){
+                var index=0;
+                var pid=document.getElementById("pid").value;
+                var name=document.getElementById("name").value;
+                var price=document.getElementById("price").value;
+                var seller=document.getElementById("seller").value;
+                var product={
+                    productId:pid,
+                    productName:name,
+                    productPrice:price,
+                    productSeller:seller,
+
+                }
+                products.push(product);
+                console.log(products);
+                showProducts();
+
+            }
+            function showProducts(){
+                var ul=document.getElementById("ul");
+                var index=0;
+                var listOfItems="";
+                while(index<products.length){
+                    var obj=products[index];
+                    listOfItems=listOfItems+ "<li>"+"obj.productId + obj.productName+obj.productPrice+obj.productSeller"+"</li>";
+                    index++;
+                }
+                ul.innerHTML=listOfItems;
+            }
+
+
+
+
+        
+
+
+
+
+
+
+        </script>
+
+    </body>
+
+
+</html>
