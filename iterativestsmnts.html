@@ -16,7 +16,7 @@
         <button onclick="addProduct()">Add Product</button>
         </center>
         <center>
-            <ul>    
+            <ul id="productDisplayList">    
 
             </ul>
         </center>
@@ -42,27 +42,23 @@
 
             }
             function showProducts(){
-                var ul=document.getElementById("ul");
+                var ul=document.getElementById("productDisplayList");
                 var index=0;
                 var listOfItems="";
                 while(index<products.length){
                     var obj=products[index];
-                    listOfItems=listOfItems+ "<li>"+"obj.productId + obj.productName+obj.productPrice+obj.productSeller"+"</li>";
+                    listOfItems=listOfItems+ "<li>"+obj.productId +"&nbsp;"+ obj.productName+
+                        "&nbsp;"+obj.productPrice+"&nbsp;"+obj.productSeller+"&nbsp;"+
+                        "<button onclick="+"deleteProduct("+index+")"+">Delete</button>"+"</li>";
                     index++;
                 }
-                ul.innerHTML=listOfItems;
+                ul.innerHTML= listOfItems;
             }
-
-
-
-
-        
-
-
-
-
-
-
+            function deleteProduct(i){
+               
+                products.splice(i, 1);
+                showProducts();
+            }
         </script>
 
     </body>
