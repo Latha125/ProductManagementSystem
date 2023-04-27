@@ -8,7 +8,7 @@
         <center>
                 <div>
                 <b>Date Selection</b><br/>
-                Please input a date: <input id ="givenDate" name="date" /><br/>
+                Please input a date: <input id ="givenDate" name="date" placeholder="Apr 28 2023 05:30:00"/><br/>
                 <br/>
                 <br/>
                 <div>Current Date: <p id = "currentDate"></p></div><br />
@@ -40,7 +40,7 @@
                 document.getElementById("timeStatus").value = "";
                 givenDateStr = document.getElementById("givenDate").value;
                 givenDate = new Date(givenDateStr);
-                currentDate = new Date("2023-04-27");
+                currentDate = new Date("2023-04-28");
                 console.log(`GivenDate = ${givenDate}, CurrentDate = ${currentDate}`);
                 var diffMs = (currentDate - givenDate); // milliseconds between current date & given date
                 var diffDays = Math.floor(diffMs / 86400000); // days
