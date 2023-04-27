@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <center>
+            <h1>Time Status</h1>
+        </center>
+    </head>
+    <body>
+        <center>
+                <div>
+                <b>Date Selection</b><br/>
+                Please input a date: <input id ="givenDate" name="date" /><br/>
+                <br/>
+                <br/>
+                <div>Current Date: <p id = "currentDate"></p></div><br />
+                <button onclick="findStatus()"> Click Me to find status</button>
+                </div>
+        </center>
+        <center>
+            <input id="timeStatus">    
+                
+        </input>
+        <div>
+        <br/>
+    </div>
+        </center>
+        <center>
+            <div>
+            <b>Statuses Definintion</b><br/>
+            <p>0- 60 seconds - Just now</p><br/>
+            <p>1- 60 mins - 5 mins ago</p><br/>
+            <p>1- 24 hours - 6 hrs ago</p><br/>
+            <p>1- 7 days - 6 days ago</p><br/>
+            <p>greater than 7 days - 1 week ago</p><br/>
+            </div>
+    </center>
+        
+        
+        <script>
+            function findStatus(){
+                document.getElementById("timeStatus").value = "";
+                givenDateStr = document.getElementById("givenDate").value;
+                givenDate = new Date(givenDateStr);
+                currentDate = new Date("2023-04-27");
+                console.log(`GivenDate = ${givenDate}, CurrentDate = ${currentDate}`);
+                var diffMs = (currentDate - givenDate); // milliseconds between current date & given date
+                var diffDays = Math.floor(diffMs / 86400000); // days
+                var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+                var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+
+                finalStatus = ""
+                // get Difference in seconds
+                var seconds = ((currentDate - givenDate) / 1000 ) % 60;
+                console.log(`seconds =${seconds},  minutes =${diffMins}, hours=${diffHrs}, days=${diffDays}`);
+                if(diffMs <0){
+                    finalStatus = "Date in the future"
+                }else if (diffDays>7){
+                    finalStatus = "1 week ago";
+                }else if ((diffDays>1 && diffDays<=7) || (diffDays ==7 && diffHrs ==0 && diffMins ==0 && seconds ==0) || (diffDays ==1 && (diffHrs >0 || diffMins >0 || seconds >0))){
+                    finalStatus = "6 days ago";
+                }else if((diffHrs >1 && diffHrs <=24)|| (diffDays ==1 && diffHrs ==0 && diffMins ==0 && seconds ==0)|| (diffHrs ==1 && ( diffMins >0 || seconds >0))){
+                    finalStatus = "6 hours ago";
+                }else if((diffMins > 1 && diffMins <= 60) || (diffMins==1 && seconds>0) || (diffHrs ==1 && diffMins ==0 && seconds ==0)){
+                    finalStatus = "5 mins ago";
+                }else if(seconds <60 || diffMins==1){
+                    finalStatus = "Just Now";
+                }
+
+
+                document.getElementById("timeStatus").value = finalStatus;
+
+            }
+
+            const d = new Date("2023-04-27");
+            document.getElementById("currentDate").innerHTML = d;
+            
+            
+        </script>
+
+    </body>
+
+
+</html>
